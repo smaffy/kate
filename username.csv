@@ -1,7 +1,6 @@
-Username; Identifier;First name;Last name
-booker12;9012;Rachel;Booker
-grey07;2070;Laura;Grey
-johnson81;4081;Craig;Johnson
-jenkins46;9346;Mary;Jenkins
-smith79;5079;Jamie;Smith
-
+Username; Identifier;First name;Last name;Date
+booker12;9012;Rachel;Booker;01.11.2020
+grey07;unknown;Laura;-; late 2021
+johnson81;4081;Craig;Johnson;11.01.2020
+jenkins46;9346;Mary;Jenkins;06.01.2020
+smith79;None;Jamie;Smith;01.04.2020

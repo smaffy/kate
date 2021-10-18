@@ -31,10 +31,6 @@ def read_csv_file(filename: str, chosen_delimiter=';') -> list:
     return data_list
 
 
-# a = read_csv_file('username.csv')
-# print(a)
-
-
 def read_csv_file_into_list_of_dicts(filename: str) -> list:
     """
     Read csv file into list of dictionaries.
@@ -71,7 +67,7 @@ def read_csv_file_into_list_of_dicts(filename: str) -> list:
 
     data_list = read_csv_file(filename)
     keys = data_list[0]
-    values = data_list[6:]
+    values = data_list[1:]
     dict_list = []
     for row in values:
         if row:
@@ -79,10 +75,6 @@ def read_csv_file_into_list_of_dicts(filename: str) -> list:
             dict_list.append(row_dict)
 
     return dict_list
-
-
-a = read_csv_file_into_list_of_dicts('username.csv')
-print(a)
 
 
 def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
@@ -161,3 +153,44 @@ def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
     For date, strptime can be used:
     https://docs.python.org/3/library/datetime.html#examples-of-usage-date
     """
+
+    data_list = read_csv_file(filename)
+    keys = data_list[0]
+    values = data_list[1:]
+    dict_list = []
+    for row in values:
+        if row:
+            row_dict = dict(zip(keys, row))
+            for k, v in row_dict.items():
+                if v == '-' or v == 'None':
+                    row_dict[k] = None
+                if v.isdigit():
+                    row_dict[k] = int(v)
+                try:
+                    datetime_obj = datetime.datetime.strptime(v, '%d.%m.%Y').date()
+                    row_dict[k] = datetime_obj
+                except:
+                    pass
+            dict_list.append(row_dict)
+
+    return dict_list
+
+
+a = read_csv_file('username.csv')
+# print(a)
+for elem in a:
+    print(elem)
+
+print(40 * '-')
+
+b = read_csv_file_into_list_of_dicts('username.csv')
+# print(b)
+for elem in b:
+    print(elem)
+
+print(40 * '-')
+
+c = read_csv_file_into_list_of_dicts_using_datatypes('username.csv')
+# print(c)
+for elem in c:
+    print(elem)
