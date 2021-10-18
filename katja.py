@@ -71,11 +71,12 @@ def read_csv_file_into_list_of_dicts(filename: str) -> list:
 
     data_list = read_csv_file(filename)
     keys = data_list[0]
-    values = data_list[1:]
+    values = data_list[6:]
     dict_list = []
     for row in values:
-        row_dict = dict(zip(keys, row))
-        dict_list.append(row_dict)
+        if row:
+            row_dict = dict(zip(keys, row))
+            dict_list.append(row_dict)
 
     return dict_list
 
