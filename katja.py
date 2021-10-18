@@ -25,17 +25,14 @@ def read_csv_file(filename: str, chosen_delimiter=';') -> list:
     :param filename: File to read.
     :return: List of lists.
     """
-    # data_list = []
     with open(filename) as f:
         csv_reader = csv.reader(f, delimiter=chosen_delimiter)
         data_list = list(csv_reader)
-        # for i in csv_reader:
-        #     data_list.append(i)
     return data_list
 
 
-a = read_csv_file('username.csv')
-print(a)
+# a = read_csv_file('username.csv')
+# print(a)
 
 
 def read_csv_file_into_list_of_dicts(filename: str) -> list:
@@ -71,20 +68,20 @@ def read_csv_file_into_list_of_dicts(filename: str) -> list:
     :param filename: CSV-file to read.
     :return: List of dictionaries where keys are taken from the header.
     """
-    list_of_dict = []
+
     data_list = read_csv_file(filename)
-    if data_list != []:
-        data_keys = data_list[0]
-        for i in data_list:
-            data_dict = {}
-            for j in i:
-                index = i.index(j)
-                data_dict[data_keys[index]] = j
-            list_of_dict.append(data_dict)
-        list_of_dict.remove(list_of_dict[0])
-        return list_of_dict
-    else:
-        return list_of_dict
+    keys = data_list[0]
+    values = data_list[1:]
+    dict_list = []
+    for row in values:
+        row_dict = dict(zip(keys, row))
+        dict_list.append(row_dict)
+
+    return dict_list
+
+
+a = read_csv_file_into_list_of_dicts('username.csv')
+print(a)
 
 
 def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
